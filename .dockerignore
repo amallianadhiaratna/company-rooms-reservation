@@ -1,6 +1,7 @@
-/bin
-/db
-/lib
-/reviews
-/media
-/employees
+bin/
+db/
+lib/
+htmlcov/
+secret
+.git
+.coverage

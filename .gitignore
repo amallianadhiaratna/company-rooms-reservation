@@ -5,6 +5,7 @@ htmlcov/
 *__pycache__*
 *__init.py__*
 secret
-*.env
 .git
 .coverage
+*.env
+*.log

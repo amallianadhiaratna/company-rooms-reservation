@@ -8,13 +8,32 @@ room’s availability, book or cancel a reservation through an API.
 
 - [Company Rooms Reservation](#company-rooms-reservation)
   - [Table of Contents](#table-of-contents)
+  - [Technologies](#technologies)
   - [Available APIs](#available-apis)
   - [Run in local without docker](#run-in-local-without-docker)
   - [Run in local with docker](#run-in-local-with-docker)
   - [Run test and coverage](#run-test-and-coverage)
   - [How to use APIs](#how-to-use-apis)
+    - [Authorization](#authorization)
+    - [Employee - Login](#employee---login)
+    - [Employee - Register](#employee---register)
+    - [Rooms - Get](#rooms---get)
+    - [Reservations - Create](#reservations---create)
+    - [Reservations - Cancel](#reservations---cancel)
+    - [Logout](#logout)
   - [Project Structures](#project-structures)
-  - [Technologies](#technologies)
+
+## Technologies
+
+This project is mainly created with:
+
+- Django version: 3.0.7
+- Django Rest Framework version: 3.11.0
+- Docker version: 20.10.14
+- docker-compose version: 1.29.2
+- MySQL version: 8.0.29
+- Python version: 3.8.10
+- Swagger/OpenAPI version: 1.17.1
 
 ## Available APIs
 
@@ -78,7 +97,7 @@ $ script/createsuperuser.sh
 
 - Developer notes : Sometimes you still cannot access the django admin, try to change the password with `python manage.py changepassword [email]`
 
-Run server with below command
+Run server with below command then you can access the server at http://127.0.0.1:8000/
 
 ```
 $ script/runserver.sh
@@ -114,8 +133,11 @@ $ docker-compose up
 - Developer notes :
 
   - <p>In this project i used image ubuntu:bionic, and the update/installation could take quite some time &#128532;</p>
+    Try to restart docker (`sudo systemctl restart docker`) and run `docker-compose down`
 
   - Run `docker-compose build` only at the first time. If there is any changes on the apps, use `docker-compose up`
+
+Then you can access the server at http://0.0.0.0:8000/
 
 ## Run test and coverage
 
@@ -136,7 +158,7 @@ File `htmlcov/index.html` will be created, you can open it in your browser and c
 
 ## How to use APIs
 
-Once you run the server, you can go to `http://localhost:8000` and you will see the swagger API
+Once you run the server, you will see the swagger API page
 
 <p align="center">
     <img src="docs/page1.png"/> 
@@ -145,7 +167,7 @@ Once you run the server, you can go to `http://localhost:8000` and you will see 
 
 There are few example of how to use the APIs shown below :
 
-- Authorization
+### Authorization
 
 The authorization will be required for all APIs except `employee/login` and `employee/register`. To add the authorization, you can choose the padlock symbol and enter the access token from `employee/login`
 
@@ -153,26 +175,34 @@ The authorization will be required for all APIs except `employee/login` and `emp
     <img src="docs/bearer-token.png"/> 
 </p>
 
-- Employee-Login : First you have to login with email and password, if the authentication successfull you will get an access token and refresh token.
+### Employee - Login
+
+To login you need to provide email and password, if the authentication successfull you will get an access token and refresh token.
 
 <p align="center">
     <img src="docs/login.png"/> 
     <img src="docs/login-response.png"/> 
 </p>
 
-- Employee-Register : See the example below to register your employee
+### Employee - Register
+
+See the example below to register your employee
 
 <p align="center">
     <img src="docs/employee-register.png"/> 
 </p>
 
-- Room-Get : See the example below to get all rooms
+### Rooms - Get
+
+See the example below to get all rooms
 
 <p align="center">
     <img src="docs/get-all-rooms.png"/> 
 </p>
 
-- Reservations-Create : See the example below to create reservation
+### Reservations - Create
+
+See the example below to create reservation
 
 <p align="center">
     <img src="docs/reservations-create.png"/> 
@@ -185,7 +215,9 @@ The authorization will be required for all APIs except `employee/login` and `emp
     <img src="docs/reservation-from-date.png"/> 
 </p>
 
-- Reservations-Cancel : See the example below to get all cancel reservation
+### Reservations - Cancel
+
+See the example below to get all cancel reservation
 
 <p align="center">
     <img src="docs/reservations-cancel.png"/> 
@@ -198,7 +230,10 @@ The authorization will be required for all APIs except `employee/login` and `emp
     <img src="docs/reservation-cancel-forbidden.png"/> 
 </p>
 
-- Logout : To logout from the server you need to provide the refresh token
+### Logout
+
+To logout from the server you need to provide the refresh token
+
 <p align="center">
     <img src="docs/logout.png"/> 
 </p>
@@ -255,16 +290,4 @@ company-rooms-reservation
 └─ script                     // Consists of useful scripts for development purposes
 
 ```
-
-## Technologies
-
-This project is mainly created with:
-
-- Django version: 3.0.7
-- Django Rest Framework version: 3.11.0
-- Docker version: 20.10.14
-- docker-compose version: 1.29.2
-- MySQL version: 8.0.29
-- Python version: 3.8.10
-- Swagger/OpenAPI version: 1.17.1
 

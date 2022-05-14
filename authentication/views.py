@@ -1,25 +1,31 @@
+import datetime
+from django.urls import reverse
+from drf_yasg import openapi
+import logging
+from rest_framework.response import Response
 from rest_framework import generics, status, permissions
+from .models import Employee
+from .renderers import UserRenderer
 from .serializers import (
     EmployeeSerializer,
     RegisterSerializer,
     LoginSerializer,
     LogoutSerializer,
 )
-from rest_framework.response import Response
-from .models import Employee
-from drf_yasg import openapi
-from .renderers import UserRenderer
-from django.urls import reverse
+
+
+logger = logging.getLogger(__name__)
 
 
 class EmployeeAPIView(generics.ListAPIView):
+    logger.warning(f'{str(datetime.datetime.now())} : Request to access /employee')
     serializer_class = EmployeeSerializer
     queryset = Employee.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
 
 
 class RegisterView(generics.GenericAPIView):
-
+    logger.warning(f'{str(datetime.datetime.now())} : Request to access /employee/register')
     serializer_class = RegisterSerializer
     renderer_classes = (UserRenderer,)
 
@@ -37,6 +43,7 @@ class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer
 
     def post(self, request):
+        logger.warning(f'{str(datetime.datetime.now())} : Request to access /employee/login with {request.data}')
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -44,13 +51,11 @@ class LoginAPIView(generics.GenericAPIView):
 
 class LogoutAPIView(generics.GenericAPIView):
     serializer_class = LogoutSerializer
-
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request):
-
+        logger.warning(f'{str(datetime.datetime.now())} : Request to access /employee/logout with {request.data}')
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-
         return Response(status=status.HTTP_204_NO_CONTENT)
