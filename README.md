@@ -6,13 +6,15 @@ room’s availability, book or cancel a reservation through an API.
 
 ## Table of Contents
 
-[Available APIs](#headers)  
-[Run in local without docker](#run-in-local-without-docker)  
-[Run in local with docker](#run-in-local-with-docker)
-[Run test and coverage](#run-test-and-coverage)
-[How to use APIs](#how-to-use-apis)
-[Project Structures](#project-structures)
-[Technologies](#technologies)
+- [Company Rooms Reservation](#company-rooms-reservation)
+  - [Table of Contents](#table-of-contents)
+  - [Available APIs](#available-apis)
+  - [Run in local without docker](#run-in-local-without-docker)
+  - [Run in local with docker](#run-in-local-with-docker)
+  - [Run test and coverage](#run-test-and-coverage)
+  - [How to use APIs](#how-to-use-apis)
+  - [Project Structures](#project-structures)
+  - [Technologies](#technologies)
 
 ## Available APIs
 
@@ -263,6 +265,6 @@ This project is mainly created with:
 - Docker version: 20.10.14
 - docker-compose version: 1.29.2
 - MySQL version: 8.0.29
-- Python versio: 3.8.10
+- Python version: 3.8.10
 - Swagger/OpenAPI version: 1.17.1
 
