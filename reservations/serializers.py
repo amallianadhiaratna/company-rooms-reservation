@@ -1,12 +1,13 @@
-from django.utils import timezone
 import datetime
 import logging
+from django.utils import timezone
 from rest_framework import serializers
 from authentication.serializers import EmployeeSerializer
 from .models import Reservation
 
 
 logger = logging.getLogger(__name__)
+
 
 class GetReservationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -39,9 +40,8 @@ class EditReservationsSerializer(serializers.ModelSerializer):
 class CancelReservationsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-        fields = (
-            'status',
-        )
+        fields = ("status",)
+
 
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -64,7 +64,7 @@ class ReservationSerializer(serializers.ModelSerializer):
     #     return obj.get_status_display()
 
     def validate(self, data):
-        logger.warning(f'{str(datetime.datetime.now())} : Validate reservations')
+        logger.warning(f"{str(datetime.datetime.now())} : Validate reservations")
         # We convert the provided date & time to our local server timezone (UTC+3)
 
         wanted_date_from = data["from_date"].astimezone(timezone.get_current_timezone())
@@ -72,7 +72,9 @@ class ReservationSerializer(serializers.ModelSerializer):
 
         # Check if the reservation starting time isn't greater than reservation ending time.
         if wanted_date_to <= wanted_date_from:
-            logger.warning(f'{str(datetime.datetime.now())} : Meeting could not end earlier than it starts')
+            logger.warning(
+                f"{str(datetime.datetime.now())} : Meeting could not end earlier than it starts"
+            )
             raise serializers.ValidationError(
                 "Meeting could not end earlier than it starts"
             )
@@ -91,7 +93,9 @@ class ReservationSerializer(serializers.ModelSerializer):
                     from_date <= wanted_date_from <= to_date
                     or from_date <= wanted_date_to <= to_date
                 ):
-                    logger.warning(f'{str(datetime.datetime.now())} : The room is already reserved for your requested time range')
+                    logger.warning(
+                        f"{str(datetime.datetime.now())} : The room is already reserved for your requested time range"
+                    )
                     raise serializers.ValidationError(
                         "The room is already reserved for your requested time range"
                     )

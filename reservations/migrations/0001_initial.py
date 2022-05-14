@@ -12,21 +12,55 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('rooms', '0001_initial'),
+        ("rooms", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Reservation',
+            name="Reservation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=120)),
-                ('book_at', models.DateTimeField(auto_now_add=True)),
-                ('from_date', models.DateTimeField(validators=[reservations.validators.validate_date_from])),
-                ('to_date', models.DateTimeField(validators=[reservations.validators.validate_date_to])),
-                ('status', models.IntegerField(choices=[(1, 'Valid'), (0, 'Cancelled')], default=1)),
-                ('employees', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='rooms.room')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=120)),
+                ("book_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "from_date",
+                    models.DateTimeField(
+                        validators=[reservations.validators.validate_date_from]
+                    ),
+                ),
+                (
+                    "to_date",
+                    models.DateTimeField(
+                        validators=[reservations.validators.validate_date_to]
+                    ),
+                ),
+                (
+                    "status",
+                    models.IntegerField(
+                        choices=[(1, "Valid"), (0, "Cancelled")], default=1
+                    ),
+                ),
+                (
+                    "employees",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "room",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="rooms.room"
+                    ),
+                ),
             ],
         ),
     ]

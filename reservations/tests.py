@@ -129,7 +129,7 @@ class ReservationsViewTest(APITestCase):
         resp = client.post(reverse("reservations"), data=reservation, format="json")
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
 
-         # Try Create Reservation for the same room and time
+        # Try Create Reservation for the same room and time
         room_id = resp.data["id"]
         employee_id = EmployeeSerializer(
             Employee.objects.get(username=username), many=False
@@ -143,5 +143,8 @@ class ReservationsViewTest(APITestCase):
             "to_date": "2023-05-14T07:33:33.319Z",
         }
         resp = client.post(reverse("reservations"), data=reservation, format="json")
-        self.assertEqual(resp.data['error'][0], "The room is already reserved for your requested time range")
+        self.assertEqual(
+            resp.data["error"][0],
+            "The room is already reserved for your requested time range",
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)

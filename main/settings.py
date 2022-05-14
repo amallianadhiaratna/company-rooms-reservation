@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import datetime 
+import datetime
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -102,16 +102,16 @@ CORS_ORIGIN_REGEX_WHITELIST = [
 
 DATABASES = {
     "default": {
-       'ENGINE': 'django.db.backends.mysql',
+        "ENGINE": "django.db.backends.mysql",
         # 'ENGINE': 'mysql.connector.django',
-        'NAME': os.environ.get('DATABASE_NAME'),
-		'USER': os.environ.get('DATABASE_USER'),
-		'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-		'HOST': os.environ.get('DATABASE_HOST'),
-		'PORT': os.environ.get('DATABASE_PORT')
+        "NAME": os.environ.get("DATABASE_NAME"),
+        "USER": os.environ.get("DATABASE_USER"),
+        "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
+        "HOST": os.environ.get("DATABASE_HOST"),
+        "PORT": os.environ.get("DATABASE_PORT"),
     }
 }
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
@@ -123,22 +123,24 @@ REST_FRAMEWORK = {
 }
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'WARNING',
-            'class': 'logging.FileHandler',
-            'filename': f'{BASE_DIR}/warning.log',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": f"{BASE_DIR}/warning.log",
         },
     },
     # A logger for WARNING which has a handler called 'file'. A logger can have multiple handler
-    'loggers': {
-       # notice the blank '', Usually you would put built in loggers like django or root here based on your needs
-        '': {
-            'handlers': ['file'], #notice how file variable is called in handler which has been defined above
-            'level': 'WARNING',
-            'propagate': True,
+    "loggers": {
+        # notice the blank '', Usually you would put built in loggers like django or root here based on your needs
+        "": {
+            "handlers": [
+                "file"
+            ],  # notice how file variable is called in handler which has been defined above
+            "level": "WARNING",
+            "propagate": True,
         },
     },
 }

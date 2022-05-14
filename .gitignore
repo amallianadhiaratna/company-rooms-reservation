@@ -2,6 +2,7 @@ bin/
 db/
 lib/
 htmlcov/
+venv/
 *__pycache__*
 *__init.py__*
 secret
@@ -9,3 +10,4 @@ secret
 .coverage
 *.env
 *.log
+.vscode

@@ -134,9 +134,14 @@ $ docker-compose up
 - Developer notes :
 
   - <p>In this project i used image ubuntu:bionic, and the update/installation could take quite some time &#128532;</p>
-    Try to restart docker (`sudo systemctl restart docker`) and run `docker-compose down`
+
+  - During the `docker-compose up` you may get `Socket.Timeout error`or `No matching distribution found`. If that happens you could do :
+
+    - try to restart docker : `sudo systemctl restart docker`
 
   - Run `docker-compose build` only at the first time. If there is any changes on the apps, use `docker-compose up`
+
+  - On current condition, everytime we run the `docker-compose up` the database will be initialize
 
 Then you can access the server at http://0.0.0.0:8000/
 
@@ -170,7 +175,7 @@ There are few example of how to use the APIs shown below :
 
 ### Authorization
 
-The authorization will be required for all APIs except `employee/login` and `employee/register`. To add the authorization, you can choose the padlock symbol and enter the access token from `employee/login`
+The authorization will be required for all APIs except `employee/login` and `employee/register`. To add the authorization, you can choose the padlock symbol and enter the access token from `employee/login` and click **Authorize**
 
 <p align="center">
     <img src="docs/bearer-token.png"/> 
@@ -201,7 +206,7 @@ To logout from the server you need to provide the refresh token
     <img src="docs/logout.png"/> 
 </p>
 
-You should clear the authorizations as well by clicking the padlock symbol
+You should clear the authorizations as well by clicking the padlock symbol and click **logout**
 
 <p align="center">
     <img src="docs/bearer-token2.png"/> 
@@ -226,7 +231,7 @@ See the example below to create reservation
     <img src="docs/reservation-successful.png"/> 
     <p>Bad request : Room is occupied</p>
     <img src="docs/reservation-room-occupied.png"/> 
-    <p>Bad request : Meeting date started befor current time</p>
+    <p>Bad request : Meeting date started before the current time</p>
     <img src="docs/reservation-from-date.png"/> 
 </p>
 
@@ -235,7 +240,7 @@ See the example below to create reservation
 See the example below to get all cancel reservation
 
 <p align="center">
-    <img src="docs/reservations-cancel.png"/> 
+    <img src="docs/reservation-cancel.png"/> 
     <p>Responses : </p>
     <p>Successful : Reservation is cancelled</p>
     <img src="docs/reservation-cancel-success.png"/> 
@@ -247,10 +252,10 @@ See the example below to get all cancel reservation
 
 ### Reservations - Filter by Employee
 
-See the example below to get all cancel reservation
+See the example below to get all reservation filtered by employee id
 
 <p align="center">
-    <img src="docs/reservations-employee-filter.png"/> 
+    <img src="docs/reservation-employee-filter.png"/> 
     <p>Responses : </p>
     <p>Successful : Reservations successful</p>
     <img src="docs/reservation-employee-resp.png"/>  
