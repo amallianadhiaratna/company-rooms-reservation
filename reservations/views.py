@@ -68,6 +68,6 @@ class CancelReservationsView(generics.UpdateAPIView):
         f"{str(datetime.datetime.now())} : Request to cancel reservations /reservations/cancel/id"
     )
     lookup_field = "id"
-    queryset = Reservation.objects.all()
+    queryset = Reservation.objects.all().filter(status=1)
     serializer_class = CancelReservationsSerializer
     permission_classes = (permissions.IsAuthenticated, IsOwner)
