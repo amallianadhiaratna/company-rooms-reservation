@@ -17,10 +17,11 @@ room’s availability, book or cancel a reservation through an API.
     - [Authorization](#authorization)
     - [Employee - Login](#employee---login)
     - [Employee - Register](#employee---register)
+    - [Employee - Logout](#employee---logout)
     - [Rooms - Get](#rooms---get)
     - [Reservations - Create](#reservations---create)
     - [Reservations - Cancel](#reservations---cancel)
-    - [Logout](#logout)
+    - [Reservations - Filter by Employee](#reservations---filter-by-employee)
   - [Project Structures](#project-structures)
 
 ## Technologies
@@ -37,7 +38,7 @@ This project is mainly created with:
 
 ## Available APIs
 
-Below is the available APIs for Company Rooms Reservation projects
+The available APIS for Company Rooms Reservation projects are listed below
 
 <p align="center">
     <img src="docs/available-apis.png"/> 
@@ -192,6 +193,20 @@ See the example below to register your employee
     <img src="docs/employee-register.png"/> 
 </p>
 
+### Employee - Logout
+
+To logout from the server you need to provide the refresh token
+
+<p align="center">
+    <img src="docs/logout.png"/> 
+</p>
+
+You should clear the authorizations as well by clicking the padlock symbol
+
+<p align="center">
+    <img src="docs/bearer-token2.png"/> 
+</p>
+
 ### Rooms - Get
 
 See the example below to get all rooms
@@ -207,9 +222,9 @@ See the example below to create reservation
 <p align="center">
     <img src="docs/reservations-create.png"/> 
     <p>Responses : </p>
-    <p>Successful : Reservations created</p>
+    <p>Successful : Reservation is created</p>
     <img src="docs/reservation-successful.png"/> 
-    <p>Bad request : Room occupied</p>
+    <p>Bad request : Room is occupied</p>
     <img src="docs/reservation-room-occupied.png"/> 
     <p>Bad request : Meeting date started befor current time</p>
     <img src="docs/reservation-from-date.png"/> 
@@ -222,20 +237,23 @@ See the example below to get all cancel reservation
 <p align="center">
     <img src="docs/reservations-cancel.png"/> 
     <p>Responses : </p>
-    <p>Successful : Reservations cancelled</p>
+    <p>Successful : Reservation is cancelled</p>
     <img src="docs/reservation-cancel-success.png"/> 
-    <p>Bad request : Reservations not found</p>
+    <p>Bad request : Reservation is not found</p>
     <img src="docs/reservation-not-found.png"/> 
     <p>Forbidden : You don't have the permission to perform this action (try to cancel other's meeting)</p>
     <img src="docs/reservation-cancel-forbidden.png"/> 
 </p>
 
-### Logout
+### Reservations - Filter by Employee
 
-To logout from the server you need to provide the refresh token
+See the example below to get all cancel reservation
 
 <p align="center">
-    <img src="docs/logout.png"/> 
+    <img src="docs/reservations-employee-filter.png"/> 
+    <p>Responses : </p>
+    <p>Successful : Reservations successful</p>
+    <img src="docs/reservation-employee-resp.png"/>  
 </p>
 
 ## Project Structures
