@@ -1,6 +1,10 @@
-/bin
-/lib
-/accounts
-/reviews
-/media
+bin/
+db/
+lib/
+htmlcov/
+*__pycache__*
+*__init.py__*
 secret
+*.env
+.git
+.coverage

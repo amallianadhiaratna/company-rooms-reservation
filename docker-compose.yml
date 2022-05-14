@@ -1,0 +1,45 @@
+version: '3'
+services:
+  db:
+    image: mysql:8.0.21
+    ports:
+      - '30000:3306'
+    environment:
+      - MYSQL_DATABASE=${DATABASE_NAME}
+      - MYSQL_USER=${DATABASE_USER}
+      - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+      - MYSQL_HOST=localhost
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
+      # - ./script/init-script.sql:/docker-entrypoint-initdb.d/init-script.sql
+  web:
+    build: .
+    command:
+      - /bin/bash
+      - -c
+      - |
+        virtualenv -p python3 .
+        source bin/activate
+        python3 -m pip install -r req-docker.txt
+        set -a && source docker.env && set +a
+        script/waitdb.sh
+        script/dbinit.sh
+        python3 manage.py makemigrations
+        script/migrate.sh
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/app
+      - /tmp/app/mysqld:/run/mysqld
+    environment:
+      - RANDOM_ENV=milla
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_HOST=db
+    depends_on:
+      - db
+
